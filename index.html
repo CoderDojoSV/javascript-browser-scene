@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Using JavaScript and jQuery to create a scene in your browser by CoderDojoSV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Using JavaScript and jQuery to create a scene in your browser</h1>
+      <h2 class="project-tagline">A quick tutorial on jquery and making a fun scene in the browser</h2>
+      <a href="https://github.com/CoderDojoSV/javascript-browser-scene" class="btn">View on GitHub</a>
+      <a href="https://github.com/CoderDojoSV/javascript-browser-scene/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/CoderDojoSV/javascript-browser-scene/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="using-javascript-and-jquery-to-create-a-scene-in-your-browser" class="anchor" href="#using-javascript-and-jquery-to-create-a-scene-in-your-browser" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using JavaScript and jQuery to create a scene in your browser</h1>
+
+<p>This week, we will grow our knowledge about javascript a bit, and we will learn a bit about jQuery.  We will use what we learn to have fun making a scene in the browser.</p>
+
+<p>The material from last week is available at <a href="http://coderdojosv.github.io/javascript-browser-game/">http://coderdojosv.github.io/javascript-browser-game/</a>  Sorry about the bugs last week.  They are fixed.</p>
+
+<p>Khan Academy is an excellent environment for learning JavaScript, and you can learn a great deal about javascript and drawing with processing.js on their site.
+<strong>However</strong>, this class actually isn't going to teach you Khan Academy, and will instead continue showing what you can do in a web page.
+You can continue to use Khan Academy's site for your own projects, but because they do not let you use external graphics nor allow for separate javascript ans css files, you should use (Thimble)[<a href="https://thimble.mozilla.org">https://thimble.mozilla.org</a>) or <a href="http://codepen.io">http://codepen.io</a> tonight.  (I used codepen.io for crafting this lesson.)</p>
+
+<p>The goal for this session is for you to learn a little more JavaScript by example, and to apply your knowledge to create a web page scene of your own, or alter the example page in your remixed version.  We will show fading and flying techniques.  The final page described below can be (seen here)[<a href="https://d157rqmxrxj6ey.cloudfront.net/jamwave/7997">https://d157rqmxrxj6ey.cloudfront.net/jamwave/7997</a>].   The example shows a space scene with aliens and flying saucers.  You are encouraged to find something that matches the season (Halloween?  Christmas?) or your interests. </p>
+
+<h1>
+<a id="background" class="anchor" href="#background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h1>
+
+<p>By now, you should be familiar with web development basics enough to understand this HTML code.  As a quick refresher, it is linking in a css page and a javascript page, then declaring a few div's (areas) to work with, and starting with some images.   </p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+&lt;<span class="pl-ent">head</span>&gt;
+  &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">meta</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>viewport<span class="pl-pds">"</span></span> <span class="pl-e">content</span>=<span class="pl-s"><span class="pl-pds">"</span>width=device-width, initial-scale=1<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">title</span>&gt;My page&lt;/<span class="pl-ent">title</span>&gt;
+  &lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>style.css<span class="pl-pds">"</span></span>&gt;
+&lt;/<span class="pl-ent">head</span>&gt;
+&lt;<span class="pl-ent">body</span>&gt;
+<span class="pl-s1">  &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>script.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>animateTop<span class="pl-pds">"</span></span>&gt;
+  &lt;/<span class="pl-ent">div</span>&gt;
+
+  &lt;<span class="pl-ent">p</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>belowTop<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">font</span> <span class="pl-e">size</span>=<span class="pl-s"><span class="pl-pds">"</span>+3<span class="pl-pds">"</span></span> <span class="pl-e">color</span>=<span class="pl-s"><span class="pl-pds">"</span>white<span class="pl-pds">"</span></span>&gt;Having an out of this world time with CoderDojo!!&lt;/<span class="pl-ent">font</span>&gt;
+  &lt;/<span class="pl-ent">p</span>&gt;
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>bottom<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">img</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://www.clker.com/cliparts/u/B/R/o/T/l/my-alien-md.png<span class="pl-pds">"</span></span> <span class="pl-e">height</span>=<span class="pl-s"><span class="pl-pds">"</span>200px<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>bottom1<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>fadeable<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">img</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://www.clker.com/cliparts/u/B/R/o/T/l/my-alien-md.png<span class="pl-pds">"</span></span> <span class="pl-e">height</span>=<span class="pl-s"><span class="pl-pds">"</span>200px<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>bottom2<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>fadeable<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">img</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://www.clker.com/cliparts/u/B/R/o/T/l/my-alien-md.png<span class="pl-pds">"</span></span> <span class="pl-e">height</span>=<span class="pl-s"><span class="pl-pds">"</span>200px<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>bottom3<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>fadeable<span class="pl-pds">"</span></span>&gt;
+  &lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;</pre></div>
+
+<p>Can you name the three div areas that are declared?  They are used later in the css page and much later in the JavaScript code.</p>
+
+<h1>
+<a id="css" class="anchor" href="#css" aria-hidden="true"><span class="octicon octicon-link"></span></a>CSS</h1>
+
+<p>Thimble creates a default css page for you.  You can replace it with this...</p>
+
+<div class="highlight highlight-source-css"><pre><span class="pl-ent">body</span> {
+  <span class="pl-c1"><span class="pl-c1">background</span></span>: <span class="pl-c1">url</span>(<span class="pl-s"><span class="pl-pds">"</span>http://www.nasa.gov/sites/default/files/137120main_hst_pluto1_full.jpg<span class="pl-pds">"</span></span>);
+  <span class="pl-c1"><span class="pl-c1">background-size</span></span>: <span class="pl-c1">100<span class="pl-k">%</span></span> <span class="pl-c1">100<span class="pl-k">%</span></span>;
+  <span class="pl-c1"><span class="pl-c1">background-repeat</span></span>: <span class="pl-c1">no-repeat</span>;
+  <span class="pl-c1"><span class="pl-c1">width</span></span>: <span class="pl-c1">800<span class="pl-k">px</span></span>;
+  <span class="pl-c1"><span class="pl-c1">height</span></span>: <span class="pl-c1">600<span class="pl-k">px</span></span>;
+}
+
+<span class="pl-e">#animateTop</span> {
+  <span class="pl-c1"><span class="pl-c1">left</span></span>: <span class="pl-c1">0</span>;
+  <span class="pl-c1"><span class="pl-c1">top</span></span>: <span class="pl-c1">0</span>;
+  <span class="pl-c1"><span class="pl-c1">position</span></span>: <span class="pl-c1">absolute</span>;
+  <span class="pl-c1"><span class="pl-c1">height</span></span>: <span class="pl-c1">auto</span>;
+}
+
+<span class="pl-e">#belowTop</span> {
+  <span class="pl-c1"><span class="pl-c1">left</span></span>: <span class="pl-c1">0</span>;
+  <span class="pl-c1"><span class="pl-c1">top</span></span>: <span class="pl-c1">200<span class="pl-k">px</span></span>;
+  <span class="pl-c1"><span class="pl-c1">position</span></span>: <span class="pl-c1">absolute</span>;
+  <span class="pl-c1"><span class="pl-c1">height</span></span>: <span class="pl-c1">auto</span>;
+  <span class="pl-c1"><span class="pl-c1">text-align</span></span>: <span class="pl-c1">center</span>;
+  <span class="pl-c1"><span class="pl-c1">margin</span></span>: <span class="pl-c1">auto</span>;
+  <span class="pl-c1"><span class="pl-c1">width</span></span>: <span class="pl-c1">60<span class="pl-k">%</span></span>;
+}
+
+<span class="pl-e">#bottom</span> {
+  <span class="pl-c1"><span class="pl-c1">left</span></span>: <span class="pl-c1">0</span>;
+  <span class="pl-c1"><span class="pl-c1">top</span></span>: <span class="pl-c1">400<span class="pl-k">px</span></span>;
+  <span class="pl-c1"><span class="pl-c1">height</span></span>: <span class="pl-c1">200<span class="pl-k">px</span></span>;
+  <span class="pl-c1"><span class="pl-c1">position</span></span>: <span class="pl-c1">absolute</span>;
+  <span class="pl-c1"><span class="pl-c1">height</span></span>: <span class="pl-c1">auto</span>;
+}
+
+<span class="pl-e">#bottom1</span> {
+  <span class="pl-c1"><span class="pl-c1">left</span></span>: <span class="pl-c1">100<span class="pl-k">px</span></span>;
+}
+
+<span class="pl-e">#bottom2</span> {
+  <span class="pl-c1"><span class="pl-c1">left</span></span>: <span class="pl-c1">300<span class="pl-k">px</span></span>;
+}
+
+<span class="pl-e">#bottom3</span> {
+  <span class="pl-c1"><span class="pl-c1">left</span></span>: <span class="pl-c1">500<span class="pl-k">px</span></span>;
+}
+
+<span class="pl-e">.fadeable</span> {
+  <span class="pl-c1"><span class="pl-c1">position</span></span>: <span class="pl-c1">absolute</span>;
+  <span class="pl-c1">alpha</span>: <span class="pl-c1">0</span>;
+}
+</pre></div>
+
+<p>This material is not intended to teach css, and in fact some of the JavaScript being presented tonight can be replaced with css that does the same animation, but let me point out a few highlights.</p>
+
+<p>This page has a background image.  I used some css tricks to stretch it to fill the page.  (I also set some hard limits on the size of the page.)</p>
+
+<p>I used absolute positions on the three areas so that I could simplify my layout.  If you want to do more advanced animation, you can certainly change things so that they overlap.</p>
+
+<p>I declared three different image elements that happen to be the same image, but at different positions.  There's no reason they have to be the same image, or even the positions I created.  Feel free to play with the positions.  For the different positions, I used element ids.  For the fadeableness, I used a class, so that I didn't have to repeat the same magic every time.</p>
+
+<p>In the fadeable class declaration, I used an alpha of 0 to start them invisible.  The <em>Alpha</em> value describes something's visibility amount.  100% is fully visible, 0% is invisible.  We will have fun playing with fade effects, which change the alpha channel.</p>
+
+<h1>
+<a id="javascript" class="anchor" href="#javascript" aria-hidden="true"><span class="octicon octicon-link"></span></a>JavaScript</h1>
+
+<p>We are going to learn a tiny bit of jQuery tonight.  jQuery is a library that is incredibly useful for manipulating elements on a web page.  Code that could take 1000s of lines in raw Javascript can take 1 line using jQuery. YAY!</p>
+
+<h2>
+<a id="jquery-selector" class="anchor" href="#jquery-selector" aria-hidden="true"><span class="octicon octicon-link"></span></a>jQuery selector</h2>
+
+<p>The single most important and noticable thing about jQuery is that it makes the getElementById call (and other calls like it) be magically accessible by an operator it creates, the dollar operator.  So, you will see this a lot in jQuery code:</p>
+
+<div class="highlight highlight-source-js"><pre>$(something)</pre></div>
+
+<p><em>something</em> is replaced in your code with an element or elements, or with other magic global objects, like "document"  (which is another word for 'the web page itself').  We will be manipllating the bottom1, bottom2 and bottom3 elements first.</p>
+
+<p>Also, JavaScript is at it's heart a <em>functional</em> language, and wants functions to call as callbacks when stuf happens..  Sometimes, we declare functions in advance, but javascript allos, and jQuery encourages anonymous functions where the code it plopped right where the callback goes.  I try to minimize that for readability here, but it's a very idiomatic way (meaning it's the accepted and usual way.)</p>
+
+<h2>
+<a id="in-your-html" class="anchor" href="#in-your-html" aria-hidden="true"><span class="octicon octicon-link"></span></a>In your html</h2>
+
+<p>We need to add one thing to the HTML to bring in jQuery.  Put it <strong>BEFORE</strong> the other Javascript line, where you include your code.</p>
+
+<div class="highlight highlight-text-html-basic"><pre><span class="pl-s1">  &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt; </span>
+<span class="pl-s1">  &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>script.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<p>When using Thimble, you have to remember to create a new JavaScript file.  In Thimble, click the green + beside the word "Files" in the upper left corner.  Choose JavaScript.  Click the name "script-1.js" and immediately click the name and delete the -1 characters so you can match the code you used earlier.
+(A nice thing about codepen.io is that you automatically get all three, visible at one time, and your html code doesn't have to do the effort of including the others.  Also, you choose your libraries, like jQuery, by a simple dropdown.  The more material I develop, the more I like codepen.)</p>
+
+<h2>
+<a id="javascript-in-the-js-file" class="anchor" href="#javascript-in-the-js-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Javascript in the js file</h2>
+
+<p>You will want all the HTML elements to be ready to use before you start making javascript calls.  Web pages make a very simple call out to any listening javascript when everything else is ready.  <a href="https://learn.jquery.com/using-jquery-core/document-ready/">This is the page where jQuery describes what is happening</a>.</p>
+
+<div class="highlight highlight-source-js"><pre>$(<span class="pl-c1">document</span>).ready(<span class="pl-k">function</span>() {
+...
+}</pre></div>
+
+<p>This is another bit of jQuery magic.   Everything in the curly braces will be run when the document is ready.</p>
+
+<h2>
+<a id="our-first-jquery-effect-fading" class="anchor" href="#our-first-jquery-effect-fading" aria-hidden="true"><span class="octicon octicon-link"></span></a>Our first jQuery effect: fading</h2>
+
+<p>Since I wanted to continually fade the images along the bottom, this is the place to start doing that.
+You may remember the setInterval call from weeks past.   This is a great time to use that for things that will repeatedly run forever (or as long as the page is up).</p>
+
+<p>So, the code in the curly brackets, represented above by ..., will have a setInterval call per thing we are going to fade.  In this example, we'll start again every 5 seconds.</p>
+
+<div class="highlight highlight-source-js"><pre>  <span class="pl-c1">setInterval</span>(<span class="pl-k">function</span>() {
+     ...
+  }, <span class="pl-c1">5000</span>);</pre></div>
+
+<p>OK, so now time for a bit more jQuery magic, and this is where it gets amazing.  jQuery uses a trick of the avaScript language to allow for chaining together calls to functions. What functions might you want to chain together?  </p>
+
+<p>I think that many of the <a href="http://api.jquery.com/category/effects/">jQuery effects</a> are interesting.<br>
+I decided to use the fade in and fade out effects for my project.  I also put a brief delay in to let the alien linger a bit.   I chain them together like this:</p>
+
+<div class="highlight highlight-source-js"><pre>    $(<span class="pl-s"><span class="pl-pds">'</span>#bottom1<span class="pl-pds">'</span></span>).fadeIn(<span class="pl-c1">1000</span>).delay(<span class="pl-c1">2000</span>).fadeOut(<span class="pl-c1">1500</span>).delay(<span class="pl-c1">5000</span>);</pre></div>
+
+<p>You can see this is the code for just one of the things at the bottom.  I prepared for three, and I want them to have different timings.  So, here is the complete code for the aliens at the bottom:</p>
+
+<div class="highlight highlight-source-js"><pre>$(<span class="pl-c1">document</span>).ready(<span class="pl-k">function</span>() {
+  <span class="pl-c1">setInterval</span>(<span class="pl-k">function</span>() {
+    $(<span class="pl-s"><span class="pl-pds">'</span>#bottom1<span class="pl-pds">'</span></span>).fadeIn(<span class="pl-c1">1000</span>).delay(<span class="pl-c1">2000</span>).fadeOut(<span class="pl-c1">1500</span>).delay(<span class="pl-c1">5000</span>);
+  }, <span class="pl-c1">5000</span>);
+  <span class="pl-c1">setInterval</span>(<span class="pl-k">function</span>() { 
+    $(<span class="pl-s"><span class="pl-pds">'</span>#bottom2<span class="pl-pds">'</span></span>).delay(<span class="pl-c1">4000</span>).fadeIn(<span class="pl-c1">1000</span>).delay(<span class="pl-c1">2000</span>).fadeOut(<span class="pl-c1">1500</span>).delay(<span class="pl-c1">4000</span>);
+  }, <span class="pl-c1">5000</span>);
+  <span class="pl-c1">setInterval</span>(<span class="pl-k">function</span>() {
+    $(<span class="pl-s"><span class="pl-pds">'</span>#bottom3<span class="pl-pds">'</span></span>).delay(<span class="pl-c1">7000</span>).fadeIn(<span class="pl-c1">1000</span>).delay(<span class="pl-c1">2000</span>).fadeOut(<span class="pl-c1">1500</span>).delay(<span class="pl-c1">5000</span>);
+  }, <span class="pl-c1">5000</span>);
+});</pre></div>
+
+<p>You can take a look at <a href="https://d157rqmxrxj6ey.cloudfront.net/jamwave/7997">my checkpoint 1 code</a> if you are stuck.</p>
+
+<p><strong>Tonight's Activities</strong>:</p>
+
+<ul>
+<li>Change the message in the HTML</li>
+<li>Add more aliens</li>
+<li>Use different aliens.</li>
+<li>Change the timing values
+** Advanced Challenges **</li>
+<li>Change from the fade effect to the slideUp and slideDown</li>
+<li>Use an entirely different scene.  Maybe ghosts in a spooky setting?  Hands coming up from below?</li>
+</ul>
+
+<h2>
+<a id="tonights-other-jquery-flying" class="anchor" href="#tonights-other-jquery-flying" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tonights other jQuery: flying</h2>
+
+<p>jQuery has a simple effect for making things go up and down, mentioned above.  Lets try a different way and learn about going across the screen with the <a href="http://api.jquery.com/animate/">jQuery animate()</a> call.  </p>
+
+<h3>
+<a id="html" class="anchor" href="#html" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTML</h3>
+
+<p>I am using the area across the top that I reserved earlier.  Add something to animate:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>  &lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>animateTop<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">img</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://images.clipartpanda.com/spaceship-clipart-spaceship1.png<span class="pl-pds">"</span></span> <span class="pl-e">height</span>=<span class="pl-s"><span class="pl-pds">"</span>100px<span class="pl-pds">"</span></span>&gt;
+  &lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+<h3>
+<a id="css-1" class="anchor" href="#css-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>CSS</h3>
+
+<p>It appears that Thimble wants to own the top of the screen.
+In the css, you might want to use a different top for the animateTop ppsition</p>
+
+<div class="highlight highlight-source-css"><pre>  top: 150px;</pre></div>
+
+<h3>
+<a id="javascript-1" class="anchor" href="#javascript-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>JavaScript</h3>
+
+<p>At the core, this is the code that will make something start at a start position and then go across.</p>
+
+<pre lang="javascipt"><code>function animateFwd() {
+  // make sure we are at the left margin
+  $('#animateTop').css({
+    'top': '0px',
+    'left': '0px'
+  });
+  //now call animate and have jQuery tween it across
+  $('#animateTop').animate({
+    'left': '1000px',
+    'top': '0px'
+  }, 2000, "linear", animateFwd);
+};
+</code></pre>
+
+<p>The <a href="http://api.jquery.com/animate/">jQuery api page for animate</a> has plenty of good information on what you can tweak.
+I want to mention a few tricks I did.  </p>
+
+<ul>
+<li>The most tricky code is that I used the last parameter of animate to tell it what to do when done with the animation.  In this case, I just wanted to repeat the animation, so I called itself.
+There's a concept in computer science called recursion, where a function call itself to get more work done.  This is sort of like that, but I hope it's just an infinite loop, and not actually calling itself within itself.<br>
+</li>
+<li>Next, I am hard coding the distance to go and time to take (which sets the pixels per second).</li>
+<li>I used the "linear" easing function which maked it appear steady.  If you replace it with "", you will see the default, which gains and loses speed at the edges.</li>
+</ul>
+
+<p>This is visible at (checkpoint 2)[<a href="https://d157rqmxrxj6ey.cloudfront.net/jamwave/8079">https://d157rqmxrxj6ey.cloudfront.net/jamwave/8079</a>]</p>
+
+<p>If you are comfortable with the way the saucer goes across repeatedly, you can skip these activities.
+Activity: </p>
+
+<ul>
+<li>use other art or different positions for the art
+Challenge:</li>
+<li>if you are up for an advanced challenge, link a few together and alter the path of the saucer!</li>
+</ul>
+
+<h2>
+<a id="even-more-advanced-flying" class="anchor" href="#even-more-advanced-flying" aria-hidden="true"><span class="octicon octicon-link"></span></a>Even More Advanced flying</h2>
+
+<p>I have a different version that can go back and forth, and can even turn around the image.</p>
+
+<p>When I first created this project, I was going for a Halloween theme, and I wanted a witch to go back and forth.
+I thought that a witch starting again and again looked weird, so I wanted it to go back and forth.  I got that working, but then I saw that a witch flying backward looked really wrong.  I spent way too much time trying to get the witch to look good going in either direction and I think I succeeded.<br>
+If you want to see that, look at <a href="http://codepen.io/jimwhitfield/full/YyEjxa/">this codepen.io page</a></p>
+
+<p>However, I decided that the code was getting too big for easy understanding, and I didn't wire up the constant repeat cycle.  (I hooked things up to buttons to test the action.  That us scrubbed from all the other code you have seen tonight.)</p>
+
+<p>Very optional Challenges:</p>
+
+<ul>
+<li>If you are up for the master challenge, take the back-and-forth code, merge it into the always-repeating going forward code</li>
+<li>If you are up for the super master challenge, have it alter the path along the way.<br>
+</li>
+</ul>
+
+<p>Another codepen that served as an inspiration is (glowing bubbles)(<a href="http://codepen.io/embrilliant/pen/bNvGJb">http://codepen.io/embrilliant/pen/bNvGJb</a>)</p>
+
+<p>Whereever you are at the end of the session, we would love for you to show your work.  You can also publish it and share it with friends and family.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/CoderDojoSV/javascript-browser-scene">Using JavaScript and jQuery to create a scene in your browser</a> is maintained by <a href="https://github.com/CoderDojoSV">CoderDojoSV</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
