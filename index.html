@@ -51,9 +51,9 @@ You can continue to use Khan Academy's site for your own projects, but because t
   &lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>animateTop<span class="pl-pds">"</span></span>&gt;
   &lt;/<span class="pl-ent">div</span>&gt;
 
-  &lt;<span class="pl-ent">p</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>belowTop<span class="pl-pds">"</span></span>&gt;
-    &lt;<span class="pl-ent">font</span> <span class="pl-e">size</span>=<span class="pl-s"><span class="pl-pds">"</span>+3<span class="pl-pds">"</span></span> <span class="pl-e">color</span>=<span class="pl-s"><span class="pl-pds">"</span>white<span class="pl-pds">"</span></span>&gt;Having an out of this world time with CoderDojo!!&lt;/<span class="pl-ent">font</span>&gt;
-  &lt;/<span class="pl-ent">p</span>&gt;
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>belowTop<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">p</span>&gt;&lt;<span class="pl-ent">font</span> <span class="pl-e">size</span>=<span class="pl-s"><span class="pl-pds">"</span>+3<span class="pl-pds">"</span></span> <span class="pl-e">color</span>=<span class="pl-s"><span class="pl-pds">"</span>white<span class="pl-pds">"</span></span>&gt;Having an out of this world time with CoderDojo!!&lt;/<span class="pl-ent">font</span>&gt;&lt;/<span class="pl-ent">p</span>&gt;
+  &lt;/<span class="pl-ent">div</span>&gt;
   &lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>bottom<span class="pl-pds">"</span></span>&gt;
     &lt;<span class="pl-ent">img</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://www.clker.com/cliparts/u/B/R/o/T/l/my-alien-md.png<span class="pl-pds">"</span></span> <span class="pl-e">height</span>=<span class="pl-s"><span class="pl-pds">"</span>200px<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>bottom1<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>fadeable<span class="pl-pds">"</span></span>&gt;
     &lt;<span class="pl-ent">img</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://www.clker.com/cliparts/u/B/R/o/T/l/my-alien-md.png<span class="pl-pds">"</span></span> <span class="pl-e">height</span>=<span class="pl-s"><span class="pl-pds">"</span>200px<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>bottom2<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>fadeable<span class="pl-pds">"</span></span>&gt;
@@ -146,7 +146,7 @@ You can continue to use Khan Academy's site for your own projects, but because t
 <h1>
 <a id="javascript" class="anchor" href="#javascript" aria-hidden="true"><span class="octicon octicon-link"></span></a>JavaScript</h1>
 
-<p>We are going to learn a tiny bit of jQuery tonight.  jQuery is a library that is incredibly useful for manipulating elements on a web page.  Code that could take 1000s of lines in raw Javascript can take 1 line using jQuery. YAY!</p>
+<p>We are going to learn a tiny bit of jQuery tonight.  <a href="https://jquery.com/">jQuery</a> is a library that is incredibly useful for manipulating elements on a web page.  Code that could take 1000s of lines in raw Javascript can take 1 line using jQuery. YAY!</p>
 
 <h2>
 <a id="jquery-selector" class="anchor" href="#jquery-selector" aria-hidden="true"><span class="octicon octicon-link"></span></a>jQuery selector</h2>
@@ -273,6 +273,12 @@ In the css, you might want to use a different top value for the animateTop posit
   }, 2000, "linear", animateFwd);
 };
 </code></pre>
+
+<p>Also, don't forget to call this function.  It just has to be in the document.ready function.  If it's the first line, then it should look like this:</p>
+
+<div class="highlight highlight-source-js"><pre>$(<span class="pl-c1">document</span>).ready(<span class="pl-k">function</span>() {
+  animateFwd();
+  ...</pre></div>
 
 <p>The <a href="http://api.jquery.com/animate/">jQuery api page for animate</a> has plenty of good information on what you can tweak.
 Here's a quick dscription of a few tricks you see here.  </p>
