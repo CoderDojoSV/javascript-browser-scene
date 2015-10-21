@@ -28,9 +28,9 @@ By now, you should be familiar with web development basics enough to understand 
   <div id="animateTop">
   </div>
   
-  <p id="belowTop">
-    <font size="+3" color="white">Having an out of this world time with CoderDojo!!</font>
-  </p>
+  <div id="belowTop">
+    <p><font size="+3" color="white">Having an out of this world time with CoderDojo!!</font></p>
+  </div>
   <div id="bottom">
     <img src="http://www.clker.com/cliparts/u/B/R/o/T/l/my-alien-md.png" height="200px" id="bottom1" class="fadeable">
     <img src="http://www.clker.com/cliparts/u/B/R/o/T/l/my-alien-md.png" height="200px" id="bottom2" class="fadeable">
@@ -117,7 +117,7 @@ Quick Activity:
 
 # JavaScript
 
-We are going to learn a tiny bit of jQuery tonight.  jQuery is a library that is incredibly useful for manipulating elements on a web page.  Code that could take 1000s of lines in raw Javascript can take 1 line using jQuery. YAY!
+We are going to learn a tiny bit of jQuery tonight.  [jQuery](https://jquery.com/) is a library that is incredibly useful for manipulating elements on a web page.  Code that could take 1000s of lines in raw Javascript can take 1 line using jQuery. YAY!
 
 ## jQuery selector
 
@@ -239,6 +239,13 @@ function animateFwd() {
     'top': '0px'
   }, 2000, "linear", animateFwd);
 };
+```
+
+Also, don't forget to call this function.  It just has to be in the document.ready function.  If it's the first line, then it should look like this:
+```javascript
+$(document).ready(function() {
+  animateFwd();
+  ...
 ```
 
 The [jQuery api page for animate](http://api.jquery.com/animate/) has plenty of good information on what you can tweak.
